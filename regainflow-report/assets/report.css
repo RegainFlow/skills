@@ -1,0 +1,307 @@
+/* ============================================================
+   RegainFlow insight-report stylesheet — for WeasyPrint
+   Design tokens sampled from "Surviving the AI Hype Cycle"
+   ============================================================ */
+
+:root {
+  --ink: #050912;          /* cover + heading near-black navy */
+  --accent: #2e4fe0;       /* primary blue */
+  --accent-soft: #7999f4;  /* light blue, cover kicker / annotations */
+  --muted: #414958;        /* secondary gray */
+  --faint: #9ea1a8;        /* tertiary gray */
+  --panel: #eff2f7;        /* figure panel background */
+  --panel-fill: #e3e8f5;   /* chart area fill */
+  --hairline: #dce1ec;
+  --cover-text: #e8eaef;
+  --cover-muted: #b7bdc9;
+}
+
+/* ---------- page setup ---------- */
+@page {
+  size: letter;
+  margin: 0.95in 1.05in 1.0in 1.05in;
+  @bottom-left {
+    content: string(brand);
+    font-family: "DejaVu Sans Mono"; font-size: 6.5pt;
+    letter-spacing: 0.28em; color: var(--faint);
+  }
+  @bottom-right {
+    content: string(doctitle) "\2003\2003" counter(page);
+    font-family: "DejaVu Sans Mono"; font-size: 6.5pt;
+    letter-spacing: 0.28em; color: var(--faint);
+  }
+}
+@page cover { margin: 0; background: #050912; @bottom-left { content: none } @bottom-right { content: none } }
+
+html { font-size: 10.5pt; }
+body {
+  font-family: "Liberation Serif", serif;
+  color: #1a1f2b;
+  line-height: 1.55;
+  margin: 0;
+}
+/* string-set sources must not be display:none (WeasyPrint drops them) */
+.brand-string  { string-set: brand content(); font-size: 0; line-height: 0; }
+.title-string  { string-set: doctitle content(); font-size: 0; line-height: 0; }
+
+p { margin: 0 0 0.7em 0; }
+a { color: var(--accent); text-decoration: none; }
+strong { color: var(--ink); }
+
+/* ---------- utility type ---------- */
+.kicker {
+  font-family: "DejaVu Sans Mono"; font-size: 7.5pt; font-weight: bold;
+  letter-spacing: 0.32em; text-transform: uppercase;
+  color: var(--muted); margin: 0 0 6pt 0;
+}
+.rule { width: 26pt; height: 3.5pt; background: var(--accent); margin: 0 0 10pt 0; }
+
+/* ---------- cover ---------- */
+.cover {
+  page: cover;
+  width: 8.5in; height: 11in;
+  background: var(--ink); color: var(--cover-text);
+  position: relative;
+  page-break-after: always;
+}
+.cover-inner { position: absolute; top: 1.6in; left: 1.05in; right: 1.6in; }
+/* Canonical RF mark — assets/logo.png (transparent bg). Non-negotiable. */
+.cover-logo { margin-bottom: 0.8in; }
+.cover-logo img { width: 88pt; }
+.cover .kicker { color: var(--accent-soft); }
+.cover .rule { background: var(--accent); }
+.cover-title {
+  font-family: "Liberation Serif"; font-weight: normal;
+  font-size: 33pt; line-height: 1.18; color: #ffffff;
+  margin: 14pt 0 16pt 0;
+}
+.cover-standfirst {
+  font-size: 12pt; line-height: 1.6; color: var(--cover-muted);
+  max-width: 4.7in;
+}
+.cover-footer { position: absolute; bottom: 1.55in; left: 1.05in; right: 1.05in; }
+.cover-tagline {
+  font-family: "DejaVu Sans Mono"; font-size: 7.5pt; font-weight: bold;
+  letter-spacing: 0.3em; text-transform: uppercase; color: var(--faint);
+  margin-bottom: 10pt;
+}
+.cover-wordmark {
+  font-family: "DejaVu Sans"; font-weight: bold; font-style: italic;
+  font-size: 19pt; letter-spacing: -0.01em;
+  position: relative; height: 26pt;
+}
+.cover-wordmark .logo-shadow { position: absolute; left: 1.8pt; top: 1.8pt; color: var(--accent); }
+.cover-wordmark .logo-face   { position: absolute; left: 0; top: 0; color: #ffffff; }
+
+/* ---------- table of contents ---------- */
+.toc { page-break-after: always; }
+.toc-title { font-size: 24pt; font-weight: normal; color: var(--ink); margin: 4pt 0 22pt 0; }
+.toc-row {
+  display: flex; justify-content: space-between; align-items: baseline;
+  border-bottom: 0.6pt solid var(--hairline);
+  padding: 7pt 0; font-size: 11pt;
+}
+.toc-row .num {
+  font-family: "DejaVu Sans Mono"; font-size: 8pt; color: var(--faint);
+  letter-spacing: 0.15em; margin-right: 12pt;
+}
+.toc-row .page {
+  font-family: "DejaVu Sans Mono"; font-size: 8.5pt; color: var(--muted);
+}
+.toc-row .label { flex: 1; }
+
+/* ---------- sections ---------- */
+.section { page-break-before: always; }
+.section-head { margin-bottom: 14pt; }
+.section-title {
+  font-family: "Liberation Serif"; font-weight: normal;
+  font-size: 23pt; color: var(--ink); margin: 2pt 0 0 0;
+}
+h3 { font-size: 12.5pt; color: var(--ink); margin: 14pt 0 6pt 0; }
+
+/* lead-in bold pattern used in stage lists */
+.lead { font-weight: bold; color: var(--ink); }
+.quote-lead { font-style: italic; color: var(--accent); }
+
+/* ---------- executive brief stat cards ---------- */
+.stat-grid {
+  display: flex; gap: 10pt; margin: 14pt 0 16pt 0;
+}
+.stat-card {
+  flex: 1; background: var(--panel); padding: 12pt 11pt 10pt 11pt;
+  border-top: 2.5pt solid var(--accent);
+}
+.stat-num { font-family: "Liberation Serif"; font-size: 24pt; color: var(--ink); line-height: 1; margin-bottom: 6pt; }
+.stat-desc { font-size: 8.8pt; line-height: 1.4; color: var(--muted); margin-bottom: 7pt; }
+.stat-src {
+  font-family: "DejaVu Sans Mono"; font-size: 6.3pt; font-weight: bold;
+  letter-spacing: 0.22em; text-transform: uppercase; color: var(--faint);
+}
+.stat-grid-label {
+  font-family: "DejaVu Sans Mono"; font-size: 7.5pt; font-weight: bold;
+  letter-spacing: 0.3em; text-transform: uppercase; color: var(--muted);
+  margin: 16pt 0 0 0;
+}
+
+/* ---------- figures ---------- */
+.figure { background: var(--panel); padding: 16pt 18pt 18pt 18pt; margin: 14pt 0 6pt 0; page-break-inside: avoid; }
+.figure-label {
+  font-family: "DejaVu Sans Mono"; font-size: 7.5pt; font-weight: bold;
+  letter-spacing: 0.28em; text-transform: uppercase; color: var(--muted);
+  border-bottom: 0.6pt solid #c9cfdd; padding-bottom: 7pt; margin-bottom: 12pt;
+}
+.figure img, .figure svg { width: 100%; }
+.figure-caption {
+  border-left: 3pt solid var(--accent); padding: 2pt 0 2pt 10pt;
+  font-size: 9.3pt; color: #5b6b8f; margin: 8pt 0 14pt 0;
+}
+
+/* ---------- tables ---------- */
+table.data {
+  width: 100%; border-collapse: collapse; margin: 12pt 0;
+  font-family: "DejaVu Sans"; font-size: 8.2pt; line-height: 1.4;
+}
+table.data th {
+  font-family: "DejaVu Sans Mono"; font-size: 6.5pt; font-weight: bold;
+  letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted);
+  text-align: left; padding: 6pt 8pt 6pt 0;
+  border-bottom: 1.1pt solid var(--ink);
+}
+table.data td {
+  padding: 7pt 8pt 7pt 0; vertical-align: top;
+  border-bottom: 0.6pt solid var(--hairline);
+}
+table.data td:first-child { font-weight: bold; color: var(--ink); }
+.table-note { font-size: 9pt; color: var(--faint); font-style: italic; margin-top: 4pt; }
+
+/* ---------- dashed checklist (recovery / discipline lists) ---------- */
+ul.dash { list-style: none; padding-left: 0; margin: 10pt 0; }
+ul.dash li {
+  padding-left: 14pt; text-indent: -14pt;
+  margin-bottom: 9pt;
+}
+ul.dash li::before { content: "–\2002"; color: var(--accent); font-weight: bold; }
+ul.dash .lead { font-weight: bold; color: var(--ink); }
+
+/* ---------- synthesis / callout box ---------- */
+.synthesis {
+  background: var(--ink); color: var(--cover-text);
+  padding: 16pt 18pt; margin: 16pt 0; page-break-inside: avoid;
+}
+.synthesis .kicker { color: var(--accent-soft); margin-bottom: 8pt; }
+.synthesis p { margin: 0; font-size: 10.5pt; line-height: 1.6; }
+
+/* ---------- sources ---------- */
+ul.sources { list-style: none; padding-left: 0; font-size: 9.5pt; }
+ul.sources li { padding-left: 14pt; text-indent: -14pt; margin-bottom: 8pt; color: #2a3140; }
+ul.sources li::before { content: "–\2002"; color: var(--accent); font-weight: bold; }
+ul.sources .src-link { font-family: "DejaVu Sans Mono"; font-size: 7.5pt; color: var(--faint); }
+
+/* ---------- authors ---------- */
+.author { display: flex; gap: 16pt; margin: 0 0 26pt 0; page-break-inside: avoid; }
+.author img { width: 92pt; height: 92pt; object-fit: cover; flex: none; }
+.author-photo-placeholder {
+  width: 92pt; height: 92pt; flex: none; background: var(--panel);
+  border: 0.6pt solid var(--hairline);
+}
+.author-name { font-size: 13pt; font-weight: bold; color: var(--ink); margin: 0 0 3pt 0; }
+.author-role {
+  font-family: "DejaVu Sans Mono"; font-size: 7.5pt; font-weight: bold;
+  letter-spacing: 0.25em; text-transform: uppercase; color: var(--accent); margin-bottom: 2pt;
+}
+.author-cred {
+  font-family: "DejaVu Sans Mono"; font-size: 7pt;
+  letter-spacing: 0.22em; text-transform: uppercase; color: var(--faint); margin-bottom: 8pt;
+}
+.author p { font-size: 10pt; }
+
+/* ============================================================
+   Extended component library (consulting-grade)
+   ============================================================ */
+
+/* ---------- pull quote ---------- */
+.pullquote {
+  border-left: 3pt solid var(--accent);
+  padding: 4pt 0 4pt 14pt; margin: 16pt 0;
+  page-break-inside: avoid;
+}
+.pullquote .pq-text {
+  font-family: "Liberation Serif"; font-style: italic;
+  font-size: 14pt; line-height: 1.45; color: var(--ink); margin-bottom: 6pt;
+}
+.pullquote .pq-attr {
+  font-family: "DejaVu Sans Mono"; font-size: 6.8pt; font-weight: bold;
+  letter-spacing: 0.24em; text-transform: uppercase; color: var(--faint);
+}
+
+/* ---------- key takeaways panel ---------- */
+.takeaways {
+  background: var(--panel); border-top: 2.5pt solid var(--accent);
+  padding: 14pt 16pt 10pt 16pt; margin: 16pt 0; page-break-inside: avoid;
+}
+.takeaways .kicker { margin-bottom: 10pt; }
+.takeaway {
+  display: flex; gap: 12pt; padding: 7pt 0;
+  border-top: 0.6pt solid #d5dbe8;
+}
+.takeaway:first-of-type { border-top: none; }
+.takeaway .tk-num {
+  font-family: "DejaVu Sans Mono"; font-size: 11pt; font-weight: bold;
+  color: var(--accent); flex: none; width: 22pt;
+}
+.takeaway .tk-body { font-size: 9.8pt; line-height: 1.5; }
+.takeaway .tk-body .lead { font-weight: bold; color: var(--ink); }
+
+/* ---------- process strip (e.g. UNDERSTAND → FOCUS → ...) ---------- */
+.process-strip {
+  display: flex; align-items: stretch; gap: 4pt; margin: 14pt 0;
+  page-break-inside: avoid;
+}
+.process-step {
+  flex: 1; background: var(--panel); text-align: center;
+  padding: 8pt 4pt;
+  font-family: "DejaVu Sans Mono"; font-size: 6.8pt; font-weight: bold;
+  letter-spacing: 0.18em; text-transform: uppercase; color: var(--ink);
+  border-bottom: 2pt solid var(--accent);
+}
+.process-step.dim { border-bottom-color: var(--hairline); color: var(--muted); }
+.process-arrow {
+  flex: none; align-self: center;
+  font-family: "DejaVu Sans"; font-size: 8pt; color: var(--faint);
+}
+
+/* ---------- side note / methodology box ---------- */
+.note {
+  background: var(--panel); border-left: 3pt solid var(--faint);
+  padding: 10pt 14pt; margin: 12pt 0; page-break-inside: avoid;
+  font-size: 9.3pt; line-height: 1.5; color: var(--muted);
+}
+.note .kicker { color: var(--muted); margin-bottom: 5pt; }
+.note.accent { border-left-color: var(--accent); }
+
+/* ---------- do / don't comparison ---------- */
+.duo { display: flex; gap: 12pt; margin: 14pt 0; page-break-inside: avoid; }
+.duo-col { flex: 1; padding: 12pt 14pt; background: var(--panel); }
+.duo-col.pos { border-top: 2.5pt solid var(--accent); }
+.duo-col.neg { border-top: 2.5pt solid #c44536; }
+.duo-col .duo-head {
+  font-family: "DejaVu Sans Mono"; font-size: 7pt; font-weight: bold;
+  letter-spacing: 0.26em; text-transform: uppercase; margin-bottom: 8pt;
+}
+.duo-col.pos .duo-head { color: var(--accent); }
+.duo-col.neg .duo-head { color: #c44536; }
+.duo-col ul { list-style: none; padding: 0; margin: 0; font-size: 9.2pt; line-height: 1.45; }
+.duo-col li { padding-left: 12pt; text-indent: -12pt; margin-bottom: 6pt; }
+.duo-col.pos li::before { content: "+\2002"; color: var(--accent); font-weight: bold; }
+.duo-col.neg li::before { content: "\2013\2002"; color: #c44536; font-weight: bold; }
+
+/* ---------- numbered recommendations (01 / 02 / 03) ---------- */
+.numlist { margin: 12pt 0; }
+.numitem { display: flex; gap: 14pt; margin-bottom: 12pt; page-break-inside: avoid; }
+.numitem .ni-num {
+  font-family: "DejaVu Sans Mono"; font-size: 15pt; font-weight: bold;
+  color: var(--accent); flex: none; width: 30pt; line-height: 1.2;
+}
+.numitem .ni-body { flex: 1; }
+.numitem .ni-title { font-weight: bold; color: var(--ink); font-size: 11pt; margin-bottom: 2pt; }
+.numitem .ni-text { font-size: 10pt; line-height: 1.5; }

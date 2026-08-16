@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<!-- RegainFlow insight-report template.
+     Every component the house style uses appears once below with placeholder
+     content. Copy this file, replace placeholders ({{...}}), delete unused
+     components, and render with scripts/build_pdf.py. -->
+<html>
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="report.css">
+</head>
+<body>
+
+<!-- ============ COVER ============ -->
+<div class="cover">
+  <!-- Running footer strings live INSIDE the cover so they don't create a
+       stray page; their values persist onto every later page. -->
+  <span class="brand-string">REGAINFLOW</span>
+  <span class="title-string">{{REPORT TITLE, UPPERCASE}}</span>
+  <div class="cover-inner">
+    <div class="cover-logo"><img src="logo.png" alt="RegainFlow"></div>
+    <div class="kicker">{{An insight report on ...}}</div>
+    <div class="rule"></div>
+    <div class="cover-title">{{Report Title<br>On Two Lines}}</div>
+    <div class="cover-standfirst">{{Two- or three-sentence standfirst: what the reader gets, in plain declarative prose.}}</div>
+  </div>
+  <div class="cover-footer">
+    <div class="cover-tagline">AI transformation, from ambition to operation.</div>
+    <div class="cover-wordmark"><span class="logo-shadow">RegainFlow</span><span class="logo-face">RegainFlow</span></div>
+  </div>
+</div>
+
+<!-- ============ CONTENTS ============ -->
+<div class="toc">
+  <div class="kicker">Contents</div>
+  <div class="toc-title">In this report</div>
+  <div class="toc-row"><span class="num">—</span><span class="label">Executive brief</span><span class="page">3</span></div>
+  <div class="toc-row"><span class="num">01</span><span class="label">{{Section one title}}</span><span class="page">4</span></div>
+  <div class="toc-row"><span class="num">02</span><span class="label">{{Section two title}}</span><span class="page">5</span></div>
+  <div class="toc-row"><span class="num">—</span><span class="label">Sources &amp; further reading</span><span class="page">{{N}}</span></div>
+  <div class="toc-row"><span class="num">—</span><span class="label">About the authors</span><span class="page">{{N}}</span></div>
+</div>
+
+<!-- ============ EXECUTIVE BRIEF ============ -->
+<div>
+  <div class="kicker">Executive brief</div>
+  <div class="section-title" style="font-size:20pt; margin-bottom:10pt;">Summary</div>
+  <p>{{The paradox or thesis, stated in two sentences.}}</p>
+
+  <div class="stat-grid-label">{{The gap this report maps}}</div>
+  <div class="stat-grid">
+    <div class="stat-card">
+      <div class="stat-num">{{88%}}</div>
+      <div class="stat-desc">{{what the number measures, one clause}}</div>
+      <div class="stat-src">{{Source}}</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num">{{42%}}</div>
+      <div class="stat-desc">{{what the number measures}}</div>
+      <div class="stat-src">{{Source}}</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num">{{25%}}</div>
+      <div class="stat-desc">{{what the number measures}}</div>
+      <div class="stat-src">{{Source}}</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num">{{~6%}}</div>
+      <div class="stat-desc">{{what the number measures}}</div>
+      <div class="stat-src">{{Source}}</div>
+    </div>
+  </div>
+
+  <p><strong>{{One-line takeaway from the stats.}}</strong></p>
+  <p>{{Two short paragraphs framing the argument and previewing the sections.}}</p>
+</div>
+
+<!-- ============ NUMBERED SECTION ============ -->
+<div class="section">
+  <div class="section-head">
+    <div class="rule"></div>
+    <div class="kicker">Section 01</div>
+    <div class="section-title">{{Section title}}</div>
+  </div>
+
+  <!-- figure panel -->
+  <div class="figure">
+    <div class="figure-label">Figure 1 / {{Figure title}}</div>
+    <img src="figures/figure-1.svg" alt="">
+  </div>
+  <div class="figure-caption">{{One-sentence caption. Credit the data or origin if generated.}}</div>
+
+  <p><span class="lead">{{Stage 1: Name.}}</span> <span class="quote-lead">&ldquo;{{Characteristic quote.}}&rdquo;</span> {{Body of the item.}}</p>
+  <p>{{Regular body paragraphs.}}</p>
+</div>
+
+<!-- ============ TABLE SECTION ============ -->
+<div class="section">
+  <div class="section-head">
+    <div class="rule"></div>
+    <div class="kicker">Section 02</div>
+    <div class="section-title">{{Section title}}</div>
+  </div>
+  <table class="data">
+    <tr><th>{{Col A}}</th><th>{{Col B}}</th><th>{{Col C}}</th><th>{{Col D}}</th></tr>
+    <tr><td>{{Row label}}</td><td>{{...}}</td><td>{{...}}</td><td>{{...}}</td></tr>
+    <tr><td>{{Row label}}</td><td>{{...}}</td><td>{{...}}</td><td>{{...}}</td></tr>
+  </table>
+  <div class="table-note">{{Optional one-line reading of the table.}}</div>
+
+  <!-- dashed checklist -->
+  <ul class="dash">
+    <li><span class="lead">{{Imperative recommendation.}}</span> {{One to three sentences of support with a concrete example.}}</li>
+    <li><span class="lead">{{Imperative recommendation.}}</span> {{Support.}}</li>
+  </ul>
+
+  <!-- dark synthesis callout -->
+  <div class="synthesis">
+    <div class="kicker">RegainFlow synthesis</div>
+    <p>{{Three-sentence closing synthesis in plain prose.}}</p>
+  </div>
+</div>
+
+<!-- ============ EXTENDED COMPONENTS (use as needed) ============ -->
+<div class="section">
+  <div class="section-head">
+    <div class="rule"></div>
+    <div class="kicker">Section {{NN}}</div>
+    <div class="section-title">{{Component gallery}}</div>
+  </div>
+
+  <!-- pull quote: for a striking line from the content or a named source -->
+  <div class="pullquote">
+    <div class="pq-text">&ldquo;{{One striking sentence worth isolating.}}&rdquo;</div>
+    <div class="pq-attr">{{Name, Role, Organization}}</div>
+  </div>
+
+  <!-- key takeaways panel: 3-5 numbered takeaways, usually near the exec brief or a section end -->
+  <div class="takeaways">
+    <div class="kicker">Key takeaways</div>
+    <div class="takeaway"><div class="tk-num">01</div><div class="tk-body"><span class="lead">{{Takeaway headline.}}</span> {{One supporting sentence.}}</div></div>
+    <div class="takeaway"><div class="tk-num">02</div><div class="tk-body"><span class="lead">{{Takeaway headline.}}</span> {{Support.}}</div></div>
+    <div class="takeaway"><div class="tk-num">03</div><div class="tk-body"><span class="lead">{{Takeaway headline.}}</span> {{Support.}}</div></div>
+  </div>
+
+  <!-- process strip: a named path or framework; add class "dim" to de-emphasize future steps -->
+  <div class="process-strip">
+    <div class="process-step">{{Understand}}</div><div class="process-arrow">&#9656;</div>
+    <div class="process-step">{{Focus}}</div><div class="process-arrow">&#9656;</div>
+    <div class="process-step">{{Prepare}}</div><div class="process-arrow">&#9656;</div>
+    <div class="process-step dim">{{Prove}}</div><div class="process-arrow">&#9656;</div>
+    <div class="process-step dim">{{Scale}}</div>
+  </div>
+
+  <!-- side note: methodology, definition, or scope caveat -->
+  <div class="note">
+    <div class="kicker">{{Methodology}}</div>
+    {{Two or three sentences on how the numbers were gathered, what a term means, or what's out of scope.}}
+  </div>
+
+  <!-- do / don't comparison -->
+  <div class="duo">
+    <div class="duo-col pos">
+      <div class="duo-head">{{What works}}</div>
+      <ul><li>{{Concrete practice.}}</li><li>{{Concrete practice.}}</li></ul>
+    </div>
+    <div class="duo-col neg">
+      <div class="duo-head">{{What fails}}</div>
+      <ul><li>{{Concrete anti-pattern.}}</li><li>{{Concrete anti-pattern.}}</li></ul>
+    </div>
+  </div>
+
+  <!-- numbered recommendations: for a short list of 3-6 major recommendations -->
+  <div class="numlist">
+    <div class="numitem"><div class="ni-num">01</div><div class="ni-body"><div class="ni-title">{{Recommendation}}</div><div class="ni-text">{{One or two sentences: what to do and why.}}</div></div></div>
+    <div class="numitem"><div class="ni-num">02</div><div class="ni-body"><div class="ni-title">{{Recommendation}}</div><div class="ni-text">{{Support.}}</div></div></div>
+  </div>
+</div>
+
+<!-- ============ SOURCES ============ -->
+<div class="section">
+  <div class="section-head">
+    <div class="rule"></div>
+    <div class="kicker">Section {{NN}}</div>
+    <div class="section-title">Sources &amp; further reading</div>
+  </div>
+  <ul class="sources">
+    <li>{{Author/Org, Title (what it supports)}} · <span class="src-link">{{domain.com}}</span></li>
+    <li>{{Author/Org, Title}} · <span class="src-link">{{domain.com}}</span></li>
+  </ul>
+</div>
+
+<!-- ============ AUTHORS ============ -->
+<!-- CANONICAL CONTENT — reproduce exactly. Photos, names, roles, credentials,
+     and bios are fixed brand assets. Do not paraphrase the bios. -->
+<div class="section">
+  <div class="section-head">
+    <div class="rule"></div>
+    <div class="kicker">About the authors</div>
+  </div>
+
+  <div class="author">
+    <img src="author-ramirez.png" alt="Leonardo J. Ramirez">
+    <div>
+      <div class="author-name">Leonardo J. Ramirez</div>
+      <div class="author-role">Co-founder &amp; CEO</div>
+      <div class="author-cred">Captain, U.S. Army</div>
+      <p>Staff full-stack engineer and AI/ML technical lead before he was a founder. Builds AI systems inside environments that do not hand you clean data, a clear brief, or spare time: law enforcement, aerospace, defense, and complex enterprise.</p>
+      <p>An Army officer before he was an engineer, which is most of how he reads an unfamiliar organization quickly. He served to Captain across three specialties, from Engineer to Signal supporting Space and Missile Defense, then Cyber Warfare running defensive operations at the national level.</p>
+    </div>
+  </div>
+
+  <div class="author">
+    <img src="author-baltus.png" alt="William J. Baltus">
+    <div>
+      <div class="author-name">William J. Baltus</div>
+      <div class="author-role">Co-founder &amp; CTO</div>
+      <div class="author-cred">B.E. Software Engineering, Stevens Institute</div>
+      <p>Engineering leadership across data, platform, and applied AI, focused on the layer most AI work skips: making a deployed system dependable, observable, and affordable enough to keep.</p>
+      <p>A software engineer by training and by temperament, working the part of the problem that decides whether a system survives contact with production: the data path, the platform underneath it, and the instrumentation that tells you the truth about both. Most AI work treats that as someone else’s job afterwards. He treats it as the design.</p>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
